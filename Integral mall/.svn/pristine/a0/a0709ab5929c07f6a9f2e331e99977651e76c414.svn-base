@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+     <package name="Emp" namespace="/Emp" extends="default">
+    	<action name="Emp_*" class="EmpAction" method="{1}">
+    		<result name="success">${pageContext.request.contextPath}/jsp/index.jsp</result>
+    		<result name="false">${pageContext.request.contextPath}/jsp/login.jsp</result>
+    		<result name="home">${pageContext.request.contextPath}/jsp/home.jsp</result>
+    		<result name="login">${pageContext.request.contextPath}/Emp/home/index.jsp</result>
+    		<result name="loginfalse">${pageContext.request.contextPath}/Emp/home/login.jsp</result>
+    		<result name="updphone">${pageContext.request.contextPath}/Emp/person/index.jsp</result>
+    	</action>
+    </package>
+</struts>

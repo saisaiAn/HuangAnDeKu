@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+   
+<hibernate-mapping package="com.Integralmall.entity">
+<!-- 商品表 -->
+ 	<class name="commodity" table="Commodity">
+        <id name="commodityno" column="CommodityNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">commodityseq</param>
+           </generator>
+        </id>
+        <property name="price" type="java.lang.Double" column="price"/>
+        <property name="needintegral" type="java.lang.Integer" column="NeedIntegral"/>
+        <property name="commoditytitle" type="java.lang.String" column="Commoditytitle"/>
+        <property name="commoditydetails" type="java.lang.String" column="Commoditydetails"/>
+        <property name="commodityinventory" type="java.lang.Integer" column="Commodityinventory"/>
+    	<many-to-one name="commoditytypeno" column="CommodityTypeNo" lazy="false" class="com.Integralmall.entity.commoditytype"/>
+    	<set name="commodityreviews" table="CommodityReview" inverse="true" lazy="false" >
+	        <key column="CommodityNo"/>
+	        <one-to-many class="com.Integralmall.entity.commodityreview"/>
+	     </set>
+	     <set name="imagers" table="imager" inverse="true" lazy="false" >
+	        <key column="imagerid"/>
+	        <one-to-many class="com.Integralmall.entity.imager"/>
+	     </set>
+    </class>
+<!-- 商品分类表 -->
+	<class name="commoditytype" table="CommodityType">
+        <id name="commodityTypeNo" column="CommodityTypeNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">commoditytypeseq</param>
+           </generator>
+        </id>
+        <property name="commoditytypename" type="java.lang.String" column="CommodityTypeName"/>
+        <property name="commodityrank" type="java.lang.Integer" column="CommodityRank"/>
+    	<many-to-one name="supercommoditytype" column="SuperCommodityType" class="com.Integralmall.entity.commoditytype"/>
+    <!-- 	<set name="commodity" inverse="true" >
+	        <key column="commoditytypeno"/>
+	        <one-to-many class="com.Integralmall.entity.commodity"/>
+	     </set> -->
+    </class>
+<!-- 商品评论表 -->
+	<class name="commodityreview" table="CommodityReview">
+        <id name="commodityreviewno" column="CommodityTypeNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">commodityreviewseq</param>
+           </generator>
+        </id>
+        <property name="reviewcontent" type="java.lang.String" column="ReviewContent"/>
+        <property name="reviewtime" type="java.lang.Integer" column="ReviewTime"/>
+    	<many-to-one name="commodityno" column="CommodityNo" lazy="false" class="com.Integralmall.entity.commodity"/>
+    	<many-to-one name="empno" column="EmpNo" lazy="false" class="com.Integralmall.entity.emp"/>
+    	<many-to-one name="imagerno" column="imagerNo" lazy="false" class="com.Integralmall.entity.imager"/>
+    </class>
+</hibernate-mapping>

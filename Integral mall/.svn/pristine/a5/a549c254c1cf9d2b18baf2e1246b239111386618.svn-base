@@ -1,0 +1,42 @@
+package com.Integralmall.dao;
+
+import java.util.ArrayList;
+
+import org.springframework.orm.hibernate3.HibernateTemplate;
+
+import com.Integralmall.entity.department;
+public class DepartmentDao{
+	private HibernateTemplate hibernateTemplate;
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+	//查询所有部门
+	public ArrayList<department> findall() {
+		System.out.println(hibernateTemplate);
+		ArrayList<department> dlist=(ArrayList<department>) hibernateTemplate.find("from department");
+		return dlist;
+	}
+	public department find(String depaname) {
+		department dlist=(department) hibernateTemplate.find("from department where depaname=?",depaname).get(0);
+		return dlist;
+	}
+	public department findNo(Integer depaNo) {
+		department dlist=(department) hibernateTemplate.find("from department where depano=?",depaNo).get(0);
+		return dlist;
+	}
+	//添加部门
+	public void Adddeparment(department depa) {
+		hibernateTemplate.save(depa);
+	}
+	//删除部门
+	public void Deldeparment(department depa) {
+		hibernateTemplate.delete(depa);
+	}
+	//修改部门
+	public void Upddeparment(department depa) {
+		hibernateTemplate.delete(depa);
+	}
+}

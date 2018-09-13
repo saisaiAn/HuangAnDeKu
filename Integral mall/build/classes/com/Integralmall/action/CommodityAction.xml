@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+     <package name="Commodity" namespace="/Commodity" extends="default">
+    	<action name="Commodity_*" class="CommodityAction" method="{1}">
+    		<param name="savePath">/updateImg</param>
+    		<result name="success">${pageContext.request.contextPath}/jsp/index.jsp</result>
+    		<result name="plist">${pageContext.request.contextPath}/jsp/Products_List.jsp</result>
+    		<result name="OrderFrom">${pageContext.request.contextPath}/jsp/Orderform.jsp</result>
+    		<result name="Order_handling">${pageContext.request.contextPath}/jsp/Order_handling.jsp</result>
+    	</action>
+    </package>
+</struts>

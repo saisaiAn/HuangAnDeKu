@@ -1,0 +1,278 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+		<title>商品评价</title>
+
+		<link href="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+
+		<link href="${pageContext.request.contextPath}/css/personal.css" rel="stylesheet" type="text/css">
+		<link href="${pageContext.request.contextPath}/css/cmstyle.css" rel="stylesheet" type="text/css">
+
+		<script src="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+
+	</head>
+<body>
+<!--å¤´ -->
+		<header>
+			<article>
+				<div class="mt-logo">
+					<!--é¡¶é¨å¯¼èªæ¡ -->
+					<div class="am-container header">
+						<ul class="message-l">
+							<div class="topMessage">
+								<div class="menu-hd">
+									<a href="#" target="_top" class="h">äº²ï¼è¯·ç»å½</a>
+								</div>
+							</div>
+						</ul>
+						<ul class="message-r">
+							<div class="topMessage home">
+								<div class="menu-hd"><a href="${pageContext.request.contextPath}/Emp/home/index.jsp" target="_top" class="h">ååé¦é¡µ</a></div>
+							</div>
+							<div class="topMessage my-shangcheng">
+								<div class="menu-hd MyShangcheng"><a href="${pageContext.request.contextPath}/Emp/person/index.jsp" target="_top"><i class="am-icon-user am-icon-fw"></i>ä¸ªäººä¸­å¿</a></div>
+							</div>
+							
+							<div class="topMessage favorite">
+								<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>æ¶èå¤¹</span></a></div>
+						</ul>
+						</div>
+
+						<!--æ¬æµ®æç´¢æ¡-->
+
+						<div class="nav white">
+							<div class="logoBig">
+								<li><img src="${pageContext.request.contextPath}/images/logobig.png" /></li>
+							</div>
+
+							<div class="search-bar pr">
+								<a name="index_none_header_sysc" href="#"></a>
+								<form>
+									<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="æç´¢" autocomplete="off">
+									<input id="ai-topsearch" class="submit am-btn" value="æç´¢" index="1" type="submit">
+								</form>
+							</div>
+						</div>
+
+						<div class="clear"></div>
+					</div>
+				</div>
+			</article>
+		</header>
+		<div class="nav-table">
+			<div class="long-title"><span class="all-goods">å¨é¨åç±»</span></div>
+			<div class="nav-cont">
+				<ul>
+					<li class="index"><a href="${pageContext.request.contextPath}/Emp/person/index.jsp">é¦é¡µ</a></li>
+					<li class="qc"><a href="#">éªè´­</a></li>
+					<li class="qc"><a href="#">éæ¶æ¢</a></li>
+					<li class="qc"><a href="#">å¢è´­</a></li>
+					<li class="qc last"><a href="#">å¤§åè£</a></li>
+				</ul>
+				<div class="nav-extra">
+					<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>æçç¦å©
+					<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+				</div>
+			</div>
+		</div>
+		<b class="line"></b>
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<div class="user-comment">
+						<!--æ é¢ -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">è¯ä»·ç®¡ç</strong> / <small>Manage&nbsp;Comment</small></div>
+						</div>
+						<hr/>
+
+						<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+
+							<ul class="am-avg-sm-2 am-tabs-nav am-nav am-nav-tabs">
+								<li class="am-active"><a href="#tab1">ææè¯ä»·</a></li>
+								<li><a href="#tab2">æå¾è¯ä»·</a></li>
+
+							</ul>
+
+							<div class="am-tabs-bd">
+								<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+
+									<div class="comment-main">
+										<div class="comment-list">
+											<ul class="item-list">
+
+												
+												<div class="comment-top">
+													<div class="th th-price">
+														<td class="td-inner">è¯ä»·</td>
+													</div>
+													<div class="th th-item">
+														<td class="td-inner">åå</td>
+													</div>													
+												</div>
+												<li class="td td-item">
+													<div class="item-pic">
+														<a href="#" class="J_MakePoint">
+															<img src="${pageContext.request.contextPath}/images/kouhong.jpg_80x80.jpg" class="itempic">
+														</a>
+													</div>
+												</li>
+
+												<li class="td td-comment">
+													<div class="item-title">
+														<div class="item-opinion">å¥½è¯</div>
+														<div class="item-name">
+															<a href="#">
+																<p class="item-basic-info">ç¾åº·ç²é»éç¾åè æä¹ä¿æ¹¿æ»æ¶¦é²æ°´ä¸æè²</p>
+															</a>
+														</div>
+													</div>
+													<div class="item-comment">
+														å®è´éå¸¸æ¼äº®ï¼è¶çº§åæ¬¢ï¼ï¼ï¼ å£çº¢é¢è²å¾æ­£åï¼è¿æç¬¬ä¸¤æ¯åä»·ï¼ä¹°ä¸æ¯ååä¸æ¯çæ´»å¨ï¼ä¸æ¬¡è¿è¦æ¥ä¹°ãå°±æ¯ç©æµå¤ªæ¢äºï¼è¿è¦æèªå·±å»åå¿«éï¼åºå®¶ä¸èèæ¢ä¸ªç©æµä¹ï¼
+													</div>
+
+													<div class="item-info">
+														<div>
+															<p class="info-little"><span>é¢è²ï¼12#çç</span> <span>åè£ï¼è£¸è£</span> </p>
+															<p class="info-time">2015-12-24</p>
+
+														</div>
+													</div>
+												</li>
+
+											</ul>
+
+										</div>
+									</div>
+
+								</div>
+								<div class="am-tab-panel am-fade" id="tab2">
+									
+									<div class="comment-main">
+										<div class="comment-list">
+											<ul class="item-list">
+												
+												
+												<div class="comment-top">
+													<div class="th th-price">
+														<td class="td-inner">è¯ä»·</td>
+													</div>
+													<div class="th th-item">
+														<td class="td-inner">åå</td>
+													</div>													
+												</div>
+												<li class="td td-item">
+													<div class="item-pic">
+														<a href="#" class="J_MakePoint">
+															<img src="${pageContext.request.contextPath}/images/kouhong.jpg_80x80.jpg" class="itempic">
+														</a>
+													</div>
+												</li>											
+												
+												<li class="td td-comment">
+													<div class="item-title">
+														<div class="item-opinion">å¥½è¯</div>
+														<div class="item-name">
+															<a href="#">
+																<p class="item-basic-info">ç¾åº·ç²é»éç¾åè æä¹ä¿æ¹¿æ»æ¶¦é²æ°´ä¸æè²</p>
+															</a>
+														</div>
+													</div>
+													<div class="item-comment">
+														å®è´éå¸¸æ¼äº®ï¼è¶çº§åæ¬¢ï¼ï¼ï¼ å£çº¢é¢è²å¾æ­£åï¼è¿æç¬¬ä¸¤æ¯åä»·ï¼ä¹°ä¸æ¯ååä¸æ¯çæ´»å¨ï¼ä¸æ¬¡è¿è¦æ¥ä¹°ãå°±æ¯ç©æµå¤ªæ¢äºï¼è¿è¦æèªå·±å»åå¿«éï¼åºå®¶ä¸èèæ¢ä¸ªç©æµä¹ï¼
+													<div class="filePic"><img src="${pageContext.request.contextPath}/images/image.jpg" alt=""></div>	
+													</div>
+
+													<div class="item-info">
+														<div>
+															<p class="info-little"><span>é¢è²ï¼12#çç</span> <span>åè£ï¼è£¸è£</span> </p>
+															<p class="info-time">2015-12-24</p>
+
+														</div>
+													</div>
+												</li>
+
+											</ul>
+
+										</div>
+									</div>									
+									
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<!--åºé¨-->
+				<div class="footer">
+					<div class="footer-hd">
+						<p>
+							<a href="#">ææç§æ</a>
+							<b>|</b>
+							<a href="#">ååé¦é¡µ</a>
+							<b>|</b>
+							<a href="#">æ¯ä»å®</a>
+							<b>|</b>
+							<a href="#">ç©æµ</a>
+						</p>
+					</div>
+					<div class="footer-bd">
+						<p>
+							<a href="#">å³äºææ</a>
+							<a href="#">åä½ä¼ä¼´</a>
+							<a href="#">èç³»æä»¬</a>
+							<a href="#">ç½ç«å°å¾</a>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<aside class="menu">
+				<ul>
+					<li class="person">
+						<a href="${pageContext.request.contextPath}/Emp/person/index.jsp">ä¸ªäººä¸­å¿</a>
+					</li>
+					<li class="person">
+						<a href="#">ä¸ªäººèµæ</a>
+						<ul>
+							<li> <a href="${pageContext.request.contextPath}/Emp/person/information.jsp">ä¸ªäººä¿¡æ¯</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">æçäº¤æ</a>
+						<ul>
+							<li><a href="${pageContext.request.contextPath}/Emp/person/order.jsp">è®¢åç®¡ç</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">æçèµäº§</a>
+						<ul>
+							<li> <a href="${pageContext.request.contextPath}/Emp/person/coupon.jsp">ä¼æ å¸ </a></li>
+							<li> <a href="${pageContext.request.contextPath}/Emp/person/bill.jsp">è´¦åæç»</a></li>
+						</ul>
+					</li>
+
+					<li class="person">
+						<a href="#">æçå°çª</a>
+						<ul>
+							<li class="active"> <a href="${pageContext.request.contextPath}/Emp/person/comment.jsp">è¯ä»·</a></li>
+						</ul>
+					</li>
+
+				</ul>
+
+			</aside>
+		</div>
+
+	</body>
+
+</html>

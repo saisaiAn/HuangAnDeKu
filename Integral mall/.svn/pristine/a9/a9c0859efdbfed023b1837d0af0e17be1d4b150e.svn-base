@@ -1,0 +1,69 @@
+package com.Integralmall.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.hibernate.*;
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean2a;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+
+import com.Integralmall.entity.imager;
+import com.Integralmall.entity.integral;
+
+public class IntegralDao {
+	private HibernateTemplate hibernateTemplate;
+	//积分查询
+	public ArrayList<integral> find(){
+		ArrayList<integral> ilist=(ArrayList<integral>) hibernateTemplate.find("from integral ");
+		return ilist;
+	}
+	//积分修改
+	public void Update(integral integral){
+		hibernateTemplate.execute(new HibernateCallback<Integer>() {
+			@Override
+			public Integer doInHibernate(Session session) throws HibernateException, SQLException {
+				String hql="update integral i set(i.totalintegral=i.totalintegral+:totalintegral,i.haveintegral=i.haveintegral+:haveintegral,i.remainingpoints=i.remainingpoints+:remainingpoints,i.lastchangetime=systimestamp) where i.emp=:emp";	
+				Query query=session.createQuery(hql);
+				query.setInteger("totalintegral", integral.getTotalintegral());
+				query.setInteger("haveintegral", integral.getHaveintegral());
+				query.setInteger("remainingpoints", integral.getRemainingpoints());
+				query.setInteger("emp", integral.getEmp().getEmpno());
+				return query.executeUpdate();
+			}
+		});
+	}
+	//积分增加
+	public void AddIntegral(integral integral){
+		hibernateTemplate.save(integral);
+	}
+	//积分删除
+	public void DelectIntegral(integral integral){
+		hibernateTemplate.delete(integral);
+	}
+	//查询总积分
+	public ArrayList<integral> findAllIntegral(int empno){
+		ArrayList<integral> ilist=(ArrayList<integral>) hibernateTemplate.find("select totalintegral from integral i where i.emp=?",empno);
+		return ilist;
+	}
+	//查询已用积分
+	public ArrayList<integral> findHaveIntegral(int empno){
+		ArrayList<integral> ilist=(ArrayList<integral>) hibernateTemplate.find("select haveintegral from integral i where i.emp=?",empno);
+		return ilist;
+	}
+	//查询剩余积分
+	public ArrayList<integral> findRestIntegral(int empno){
+		ArrayList<integral> ilist=(ArrayList<integral>) hibernateTemplate.find("select remainingpoints from integral i where i.emp=?",empno);
+		return ilist;
+	}
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+	
+}

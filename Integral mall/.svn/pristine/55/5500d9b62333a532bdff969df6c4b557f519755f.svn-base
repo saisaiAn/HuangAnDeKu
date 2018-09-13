@@ -1,0 +1,44 @@
+package com.Integralmall.biz;
+
+import java.util.ArrayList;
+
+import org.springframework.orm.hibernate3.HibernateTemplate;
+
+import com.Integralmall.entity.emp;
+import com.Integralmall.entity.integralaudit;
+import com.Integralmall.entity.integralschedule;
+import com.Integralmall.entity.integraltype;
+
+/*
+ * 积分明细dao
+ */
+public class IntegralscheduleBiz {
+	private HibernateTemplate hibernateTemplate;
+	//增加积分明细
+	public void AddIntegralaudit(integralschedule inte){
+		hibernateTemplate.save(inte);
+	}
+	//修改积分明细
+	public void UpdateIntegralaudit(integralaudit inte){
+		hibernateTemplate.update(inte);
+	}
+	//删除积分明细
+	public void DeleIntegralaudit(integralaudit inte){
+		hibernateTemplate.delete(inte);
+	}
+	//查看积分明细
+	public ArrayList<integralaudit> findIntegralaudit(){
+		ArrayList<integralaudit> inte=(ArrayList<integralaudit>) hibernateTemplate.find("from integralaudit");
+		return inte;
+	}
+	 
+	
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+	
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+   
+<hibernate-mapping package="com.Integralmall.entity">
+<!-- 积分表 -->
+    <class name="integral" table="Integral">
+        <id name="intergralno" column="IntergralNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">integralseq</param>
+           </generator>
+        </id>
+        <property name="totalintegral" type="java.lang.Integer" column="TotalIntegral"/>
+        <property name="haveintegral" type="java.lang.Integer" column="HaveIntegral"/>
+        <property name="remainingpoints" type="java.lang.Integer" column="RemainingPoints"/>
+        <property name="lastchangetime" type="java.lang.String" column="LastChangeTime"/>
+        <many-to-one name="emp" class="com.Integralmall.entity.emp" cascade="all" column="empno" unique="true"/>
+        <set name="integralschedules" table="Integralschedule" >
+	        <key column="IntegralNo"/>
+	        <one-to-many class="com.Integralmall.entity.integralschedule"/>
+	     </set>
+    </class>
+<!-- 积分明细表 -->
+    <class name="integralschedule" table="Integralschedule">
+        <id name="intergralscheduleno" column="intergralScheduleNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">integralscheduleseq</param>
+           </generator>
+        </id>
+        <property name="intergralchange" type="java.lang.Integer" column="intergralChange"/>
+        <property name="changenumber" type="java.lang.Integer" column="ChangeNumber"/>
+        <property name="changedate" type="java.lang.String" column="ChangeDate"/>
+        <many-to-one name="empno" column="empNo" class="com.Integralmall.entity.emp"/>
+        <many-to-one name="reviewer" column="reviewer" class="com.Integralmall.entity.emp"/>
+        <many-to-one name="integralno" column="IntegralNo" class="com.Integralmall.entity.integral"/>
+        <many-to-one name="integraltypeno" column="IntegralTypeNo" class="com.Integralmall.entity.integraltype"/>
+    </class>
+<!-- 积分审核表 -->
+ 	<class name="integralaudit" table="IntegralAudit">
+        <id name="integralauditno" column="IntegralAuditNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">integralscheduleseq</param>
+           </generator>
+        </id>
+        <property name="intergralchange" type="java.lang.String" column="intergralChange"/>
+        <property name="changenumber" type="java.lang.Integer" column="ChangeNumber"/>
+        <property name="audittype" type="java.lang.Integer" column="AuditType"/>
+        <property name="auditopinion" type="java.lang.String" column="AuditOpinion"/>
+        <many-to-one name="empno" column="empNo" class="com.Integralmall.entity.emp"/>
+        <many-to-one name="reviewer" column="reviewer" class="com.Integralmall.entity.emp"/>
+        <many-to-one name="integraltypeno" column="IntegralTypeNo" class="com.Integralmall.entity.integral"/>
+    </class>
+<!-- 积分类别表 -->
+ 	<class name="integraltype" table="IntegralType">
+        <id name="integraltypeno" column="IntegralTypeNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">integraltypeseq</param>
+           </generator>
+        </id>
+        <property name="integraltypename" type="java.lang.String" column="IntegralTypeName"/>
+    </class>
+</hibernate-mapping>

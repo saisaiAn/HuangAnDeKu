@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+     <package name="Order" namespace="/Order" extends="default">
+    	<action name="Order_*" class="OrdersAction" method="{1}">
+    		<result name="success">${pageContext.request.contextPath}/jsp/Orderform.jsp</result>
+    		<result name="handling">${pageContext.request.contextPath}/jsp/Order_handling.jsp</result>
+    		<result name="detailed">${pageContext.request.contextPath}/jsp/order_detailed.jsp</result>
+    	</action>
+    </package>
+</struts>

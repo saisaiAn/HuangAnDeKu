@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+   
+<hibernate-mapping package="com.Integralmall.entity">
+<!-- 员工表 -->
+     <class name="emp" table="Emp">
+        <id name="empno" column="EmpNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">empseqs</param>
+           </generator>
+        </id>
+        <property name="empname" type="java.lang.String" column="EmpName"/>
+        <property name="empsex" type="java.lang.String" column="EmpSex"/>
+        <property name="idcard" type="java.lang.String" column="IDcard"/>
+        <property name="positivedates" type="java.sql.Timestamp" column="Positivedates"/>
+        <property name="empphone" type="java.lang.String" column="EmpPhone"/>
+        <property name="username" type="java.lang.String" column="username"/>
+        <property name="password" type="java.lang.String" column="password"/>
+        <property name="position" type="java.lang.Integer" column="position"/>
+        <one-to-one name="intergralno" property-ref="emp"   lazy="false" class="com.Integralmall.entity.integral"/>
+        <many-to-one name="department" column="DepartmentNo" lazy="false" class="com.Integralmall.entity.department"/>
+    </class>
+    <!-- 部门表 -->
+    <class name="department" table="Department">
+        <id name="depano" column="depaNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">depaseq</param>
+           </generator>
+        </id>
+        <property name="depaname" type="java.lang.String" column="depaName"/>
+        <property name="parentdepa" type="java.lang.Integer" column="parentDepa"/>
+    	  <set name="emps" table="Emp"  lazy="false">
+	        <key column="DepartmentNo"></key>
+	        <one-to-many class="com.Integralmall.entity.emp"></one-to-many>
+	     </set>
+    </class>
+
+
+<!-- 图片表 -->
+	<class name="imager" table="Imager">
+        <id name="imagerno" column="imagerNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">imagerseq</param>
+           </generator>
+        </id>
+        <property name="imagerurl" type="java.lang.String" column="imagerUrl"/>
+        <property name="imagerdescription" type="java.lang.String" column="ImagerDescription"/>
+        <property name="imageclassification" type="java.lang.String" column="Imageclassification"/>
+        <property name="imagerid" type="java.lang.Integer" column="ImagerId"/>
+    </class>
+<!-- 订单表 -->
+	<class name="orders" table="Orders">
+        <id name="orderno" column="OrderNo" type="java.lang.Integer">
+           <generator class="sequence">
+           		<param name="sequence">ordersseq</param>
+           </generator>
+        </id>
+        <property name="orderintegral" type="java.lang.String" column="OrderIntegral"/>
+        <property name="ordertime" type="java.sql.Timestamp" column="OrderTime"/>
+        <property name="orderstatus" type="java.lang.Integer" column="OrderStatus"/>
+        <property name="commoditySum" type="java.lang.Integer" column="commoditySum"/>
+        <property name="random" type="java.lang.String" column="random"/>
+        <many-to-one  lazy="false" name="ordercommodityno" column="OrderCommodityNo" class="com.Integralmall.entity.commodity"/>
+    	<many-to-one  lazy="false" name="empno" column="EmpNo" class="com.Integralmall.entity.emp"/>
+    </class>
+</hibernate-mapping>

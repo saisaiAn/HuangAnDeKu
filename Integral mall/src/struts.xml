@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.multipart.saveDir" value="${pageContext.request.contextPath}/updateImgs"/>
+     <package name="default" namespace="/" extends="struts-default">
+    </package>
+    <include file="com/Integralmall/action/EmpAction.xml"></include>
+    <include file="com/Integralmall/action/ImagerAction.xml"></include>
+    <include file="com/Integralmall/action/CommodityAction.xml"></include>
+    <include file="com/Integralmall/action/DepartmentAction.xml"></include>
+    <include file="com/Integralmall/action/IntegralAction.xml"></include>
+    <include file="com/Integralmall/action/OrdersAction.xml"></include>
+    <include file="com/Integralmall/action/PayAction.xml"></include>
+</struts>

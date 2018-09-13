@@ -1,0 +1,58 @@
+package com.Integralmall.dao;
+
+import java.util.ArrayList;
+
+import org.springframework.orm.hibernate3.HibernateTemplate;
+
+import com.Integralmall.entity.emp;
+import com.Integralmall.entity.integralaudit;
+import com.Integralmall.entity.integraltype;
+
+/*
+ * 积分审核dao
+ */
+public class IntegralAuditDao {
+	private HibernateTemplate hibernateTemplate;
+	//增加积分审核
+	public void AddIntegralaudit(integralaudit inte){
+		hibernateTemplate.save(inte);
+	}
+	//修改积分审核
+	public void UpdateIntegralaudit(integralaudit inte){
+		hibernateTemplate.update(inte);
+	}
+	//删除积分审核
+	public void DeleIntegralaudit(integralaudit inte){
+		hibernateTemplate.delete(inte);
+	}
+	//查看积分审核
+	public ArrayList<integralaudit> findIntegralaudit(){
+		ArrayList<integralaudit> inte=(ArrayList<integralaudit>) hibernateTemplate.find("from integralaudit");
+		return inte;
+	}
+	 
+	//审核表查审核人
+	public ArrayList<integralaudit> findreviewer(emp emp){
+		ArrayList<integralaudit> inte=(ArrayList<integralaudit>) hibernateTemplate.find("from integralaudit i inner join i.empno where i.empno=?",emp);
+		return inte;
+	}
+	//查询审核状态
+	public ArrayList<integralaudit> findauditType(){
+		ArrayList<integralaudit> inte=(ArrayList<integralaudit>) hibernateTemplate.find("select i.IntegralAuditNo,i.AuditType from integralaudit i");
+		return inte;
+	}
+	//查询积分审核类别
+	public ArrayList<integralaudit> findIntegraltypeno(){
+		ArrayList<integralaudit> inte=(ArrayList<integralaudit>) hibernateTemplate.find("select i.IntegralAuditNo,i.IntegralTypeNo,inte.integraltypename from integralaudit i inner join integraltype inte on i.integraltypeno=inte.integraltypeno");
+		return inte;
+	}
+	
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+	
+}

@@ -1,0 +1,21 @@
+package com.Integralmall.biz;
+
+import com.Integralmall.dao.imagerDao;
+import com.Integralmall.entity.imager;
+
+public class imagerBiz {
+	private imagerDao imagerdao;
+	
+	//增加图片
+		public void Addimager(imager imager) {
+			imagerdao.Addimager(imager);
+		}
+	public imagerDao getImagerdao() {
+		return imagerdao;
+	}
+
+	public void setImagerdao(imagerDao imagerdao) {
+		this.imagerdao = imagerdao;
+	}
+	
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+	<bean id="CommodityDao" class="com.Integralmall.dao.CommodityDao">
+		<property name="hibernateTemplate" ref="HibernateTemplate"/>
+	</bean>
+	<bean id="CommodityBiz" class="com.Integralmall.biz.CommodityBiz">
+		<property name="commodityDao" ref="CommodityDao"/>
+	</bean>
+	<!-- Action -->
+	 <bean class="com.Integralmall.action.CommodityAction"
+		name="CommodityAction" scope="prototype">
+		<property name="commodityBiz" ref="CommodityBiz"/>
+		<property name="imagerbiz" ref="imagerBiz"/>
+		<property name="commoditytypeBiz" ref="commodityTypebiz"/>
+	</bean> 
+</beans>

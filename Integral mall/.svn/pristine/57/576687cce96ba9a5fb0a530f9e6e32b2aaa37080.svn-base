@@ -1,0 +1,53 @@
+package com.Integralmall.entity;
+
+import java.io.Serializable;
+
+//商品分类表
+public class commoditytype implements Serializable {
+	private Integer commodityTypeNo;//CommodityTypeNo Number primary key,--商品分类编号(?CommodityTypeNo)	Number	30	否	主键	自增
+	private String commoditytypename;//CommodityTypeName NUMBER(38,2)not null,--商品类型名称(CommodityTypeName)	Double	10	否		
+	private commoditytype supercommoditytype;//SuperCommodityType number not null,--商品上级分类(SuperCommodityType)	Number	30	否		
+	private Integer commodityrank;//CommodityRank number not null--类型级别(CommodityRank)	Number	2	否		用于类别分级
+	
+	public Integer getCommodityTypeNo() {
+		return commodityTypeNo;
+	}
+	public void setCommodityTypeNo(Integer commodityTypeNo) {
+		this.commodityTypeNo = commodityTypeNo;
+	}
+	public String getCommoditytypename() {
+		return commoditytypename;
+	}
+	public void setCommoditytypename(String commoditytypename) {
+		this.commoditytypename = commoditytypename;
+	}
+	public commoditytype getSupercommoditytype() {
+		return supercommoditytype;
+	}
+	public void setSupercommoditytype(commoditytype supercommoditytype) {
+		this.supercommoditytype = supercommoditytype;
+	}
+	public Integer getCommodityrank() {
+		return commodityrank;
+	}
+	public void setCommodityrank(Integer commodityrank) {
+		this.commodityrank = commodityrank;
+	}
+	public commoditytype(Integer commoditytypeno, String commoditytypename, commoditytype supercommoditytype,
+			Integer commodityrank) {
+		super();
+		this.commodityTypeNo = commoditytypeno;
+		this.commoditytypename = commoditytypename;
+		this.supercommoditytype = supercommoditytype;
+		this.commodityrank = commodityrank;
+	}
+	public commoditytype() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "commoditytype [commoditytypeno=" + commodityTypeNo + ", commoditytypename=" + commoditytypename
+				+ ", supercommoditytype=" + supercommoditytype + ", commodityrank=" + commodityrank + "]";
+	}
+	
+}

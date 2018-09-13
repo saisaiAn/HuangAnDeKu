@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+     <package name="integral" namespace="/integral" extends="default">
+    	<action name="Integral_*" class="IntegralAction" method="{1}">
+   			<result name="guestbook">${pageContext.request.contextPath}/jsp/Guestbook.jsp</result>
+   			<result name="Feedback">${pageContext.request.contextPath}/jsp/Feedback.jsp</result>
+   			<result name="Detail">${pageContext.request.contextPath}/jsp/Detail.jsp</result>
+   			<param name="savePath">/Excels</param>
+         	<result name="input">${pageContext.request.contextPath}/jsp/Systems.jsp</result>
+    		<result name="success">index.jsp</result>
+    		<result name="Review">${pageContext.request.contextPath}/jsp/Review.jsp</result>
+    		<result name="topup">${pageContext.request.contextPath}/jsp/top-up.jsp</result>
+    		<result name="Excel">${pageContext.request.contextPath}/jsp/Excel.jsp</result>
+    		<result name="points">${pageContext.request.contextPath}/Emp/person/points.jsp</result>
+    		 <result name="downFile" type="stream">  
+        	<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+            <!-- inputName 流对象名 —— 比如这里写inputStream，它就会自动去找Action中的getInputStream方法。 -->
+            <param name="inputName">inputStream</param>
+            <!-- contentDisposition 使用经过转码的文件名作为下载文件名 —— 默认格式是attachment;filename="${fileName}"，将调用该Action中的getFileName方法。 -->
+            <param name="contentDisposition">attachment;filename=${filename}</param>
+            <!-- bufferSize 下载文件的缓冲大小 -->
+            <param name="bufferSize">4096</param>
+            </result>
+    	</action>
+    </package>
+</struts>

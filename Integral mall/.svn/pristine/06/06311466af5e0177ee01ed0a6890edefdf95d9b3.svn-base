@@ -1,0 +1,50 @@
+package com.Integralmall.biz;
+
+import java.util.ArrayList;
+
+import com.Integralmall.dao.EmpDao;
+import com.Integralmall.entity.department;
+import com.Integralmall.entity.emp;
+
+public class EmpBiz {
+	private EmpDao empdao;
+	//查询所有员工
+	public ArrayList<emp> findall(){
+		return empdao.findall();
+	}
+		//查询部门员工
+		public ArrayList<emp> findal(department department){
+			ArrayList<emp> elist= empdao.findal(department);
+			return elist;	
+		}
+		//登陆方法
+		public emp findlogin(String username ,String password) {
+			emp e=(emp)empdao.findlogin(username, password);
+			System.out.println(e);
+			return e;
+		}
+		//添加方法
+		public void AddEmp(emp emp) {
+			empdao.AddEmp(emp);
+		}
+		//修改方法
+		public void UpdEmp(emp emp) {
+			empdao.UpdEmp(emp);
+		}
+		//查询用户数量
+		public Integer findsum() {
+			Integer integer= empdao.findsum();
+			System.out.println("Biz"+integer);
+			return integer;
+		}
+		public emp find(Integer empno) {
+			return empdao.find(empno);
+		}
+	public EmpDao getEmpdao() {
+		return empdao;
+	}
+	public void setEmpdao(EmpDao empdao) {
+		this.empdao = empdao;
+	}
+	
+}

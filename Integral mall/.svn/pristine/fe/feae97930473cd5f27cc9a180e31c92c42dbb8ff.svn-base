@@ -1,0 +1,51 @@
+package com.Integralmall.biz;
+
+import java.util.ArrayList;
+
+import com.Integralmall.dao.IntegralDao;
+import com.Integralmall.entity.emp;
+import com.Integralmall.entity.integral;
+
+public class integralBiz {
+	private IntegralDao integraldao;
+	
+	//积分查询
+	public ArrayList<integral> find(){
+		return integraldao.find();
+	}
+	//积分修改
+	public void Update(integral integral){
+		integraldao.Update(integral);
+	}
+	//积分增加
+	public void AddIntegral(integral integral){
+		integraldao.AddIntegral(integral);
+	}
+	//积分删除
+	public void DelectIntegral(integral integral){
+		integraldao.DelectIntegral(integral);
+	}
+	//查询总积分
+	public ArrayList<integral> findAllIntegral(int empno){
+		return integraldao.findAllIntegral(empno);
+	}
+	//查询已用积分
+	public ArrayList<integral> findHaveIntegral(int empno){
+		return integraldao.findHaveIntegral(empno);
+	}
+	//查询剩余积分
+	public ArrayList<integral> findRestIntegral(int empno){
+		return integraldao.findRestIntegral(empno);
+	}
+	public void DelEmpIntegral(emp emp) {
+		integraldao.DelEmpIntegral(emp);
+	}
+	public IntegralDao getIntegraldao() {
+		return integraldao;
+	}
+
+	public void setIntegraldao(IntegralDao integraldao) {
+		this.integraldao = integraldao;
+	}
+	
+}

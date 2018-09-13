@@ -1,0 +1,234 @@
+package com.Integralmall.action;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import org.apache.struts2.ServletActionContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.Integralmall.biz.CommodityBiz;
+import com.Integralmall.biz.CommodityTypeBiz;
+import com.Integralmall.biz.DepartmentBiz;
+import com.Integralmall.biz.EmpBiz;
+import com.Integralmall.biz.OrdersBiz;
+import com.Integralmall.entity.commoditytype;
+import com.Integralmall.biz.integralBiz;
+import com.Integralmall.entity.department;
+import com.Integralmall.entity.emp;
+import com.Integralmall.entity.integral;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class EmpAction extends ActionSupport {
+	private DepartmentBiz departmentBiz;
+	private EmpBiz empBiz;
+	private OrdersBiz orderbiz;
+	private CommodityTypeBiz ctypebiz;
+	private integralBiz integralbiz;
+	private CommodityBiz commoditybiz;
+	 private String empno;// number primary key,--员工编号(EmpNo)	Varchar2	30	否	主键	条件自增
+	 private String empname;//EmpName varchar2(30) not null,--姓名(EmpName)	Varchar2	30	否		
+	 private String empsex;// EmpSex varchar2(2) not null,--性别(EmpSex)	Varchar2	2	否		只能为:男,女
+	 private String idcard;//IDcard varchar2(18) not null,--身份证(IDcard)	Varchar2	18	否		
+	 private department department;// DepartmentNo number not null,--部门(DepartmentNo)	Number	30	是	外键	链接部门表
+	 private String positivedates;// Positivedates timestamp not null,--转正日期(Positivedates)	Time	Null	否	
+	 private String empphone;// EmpPhone varchar2(11) not null,--电话(EmpPhone)	Varchar2	11	否		
+	 private integral intergralno;// intergralNo varchar2(20) not null,--积分(intergralNo)	Varchar2	20	否	外键	链接积分表
+	 private String position;// position number not null --职位(position)	Number	2	否	用户权限限制	1: 
+	 private String username;
+	 private String password;
+	 private String yzm;
+	private static String SUCCESS="success";
+	SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd" ); 
+	public String findall() {
+		ServletActionContext.getRequest().setAttribute("dlist", departmentBiz.findall());
+		return SUCCESS;
+	}
+	//后台登录
+	public String login() {
+		System.out.println(empBiz);
+		emp emp= empBiz.findlogin(username, password);
+		int empsum=empBiz.findsum();
+		int ordersum= orderbiz.findsum();
+		System.out.println(emp);
+			if(emp!=null) {
+				System.out.println(emp.getDepartment());
+			ServletActionContext.getRequest().getSession().setAttribute("user", emp);
+			ServletActionContext.getRequest().getSession().setAttribute("usersum",empsum );
+			ServletActionContext.getRequest().getSession().setAttribute("ordersum",ordersum);
+			ServletActionContext.getRequest().getSession().setAttribute("orderTj",orderbiz.findTj());
+			ServletActionContext.getRequest().getSession().setAttribute("orderDlq",orderbiz.findDlq());
+			ServletActionContext.getRequest().getSession().setAttribute("orderYcj",orderbiz.findYcj());
+			ServletActionContext.getRequest().getSession().setAttribute("tlist", ctypebiz.findCommodityTypeRank(1));
+			ServletActionContext.getRequest().getSession().setAttribute("comsize", commoditybiz.findAllCommdity().size());
+			ServletActionContext.getRequest().getSession().setAttribute("comlist", commoditybiz.findAllCommdity());
+			return SUCCESS;
+			}else {
+			ServletActionContext.getRequest().setAttribute("pd", "登录失败");
+			return "false";
+			}
+	}
+	//前台登录
+	public String loginIndex() {
+		emp emp= empBiz.findlogin(username, password);
+		int empsum=empBiz.findsum();
+		int ordersum= orderbiz.findsum();
+		System.out.println(emp.getDepartment());
+		if(!emp.getUsername().equals("")) {
+			ServletActionContext.getRequest().getSession().setAttribute("user", emp);
+			return "login";
+		}else{
+			return "loginfalse";
+		}
+	}
+	//修改员工
+	public String UpdEmp() {
+		emp emp=new emp();
+		emp.setDepartment(departmentBiz.find(department.getDepaname()));
+		emp.setEmpname(empname);
+		emp.setEmpno(Integer.parseInt(empno));
+		emp.setEmpphone(empphone);
+		emp.setEmpsex(empsex);
+		emp.setIdcard(idcard);
+		emp.setUsername(username);
+		emp.setPosition(Integer.parseInt(position));
+		 java.util.Date d = null;  
+	        try {  
+	            d = sdf.parse(positivedates);  
+	        } catch (Exception e) {  
+	            e.printStackTrace();  
+	        }  
+	        java.sql.Date date = new java.sql.Date(d.getTime());  
+		emp.setPositivedates(date);
+		emp.setPassword(password);
+		empBiz.UpdEmp(emp);
+		ServletActionContext.getRequest().getSession().setAttribute("user", empBiz.findlogin(username, password));
+		return SUCCESS;
+	}
+	//订单查询
+	public String findorder() {
+			ServletActionContext.getRequest().getSession().setAttribute("usersum",empBiz.findsum() );
+			ServletActionContext.getRequest().getSession().setAttribute("ordersum",orderbiz.findsum());
+			ServletActionContext.getRequest().getSession().setAttribute("orderTj",orderbiz.findTj());
+			ServletActionContext.getRequest().getSession().setAttribute("orderDlq",orderbiz.findDlq());
+			ServletActionContext.getRequest().getSession().setAttribute("orderYcj",orderbiz.findYcj());
+			return "home";
+	}
+	public DepartmentBiz getDepartmentBiz() {
+		return departmentBiz;
+	}
+	public void setDepartmentBiz(DepartmentBiz departmentBiz) {
+		this.departmentBiz = departmentBiz;
+	}
+	
+public CommodityTypeBiz getCtypebiz() {
+		return ctypebiz;
+	}
+	public void setCtypebiz(CommodityTypeBiz ctypebiz) {
+		this.ctypebiz = ctypebiz;
+	}
+	//	public EmpBiz getEmpBiz() {
+//		return empBiz;
+//	}
+//	public void setEmpBiz(EmpBiz empBiz) {
+//		this.empBiz = empBiz;
+//	}
+	public String getUsername() {
+		return username;
+	}
+	public EmpBiz getEmpBiz() {
+		return empBiz;
+	}
+	public void setEmpBiz(EmpBiz empBiz) {
+		this.empBiz = empBiz;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public OrdersBiz getOrderbiz() {
+		return orderbiz;
+	}
+	public void setOrderbiz(OrdersBiz orderbiz) {
+		this.orderbiz = orderbiz;
+	}
+	public String getEmpno() {
+		return empno;
+	}
+	public void setEmpno(String empno) {
+		this.empno = empno;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	public String getEmpname() {
+		return empname;
+	}
+	public void setEmpname(String empname) {
+		this.empname = empname;
+	}
+	public String getEmpsex() {
+		return empsex;
+	}
+	public void setEmpsex(String empsex) {
+		this.empsex = empsex;
+	}
+	public String getIdcard() {
+		return idcard;
+	}
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+	public department getDepartment() {
+		return department;
+	}
+	public void setDepartment(department department) {
+		this.department = department;
+	}
+	public String getPositivedates() {
+		return positivedates;
+	}
+	public void setPositivedates(String positivedates) {
+		this.positivedates = positivedates;
+	}
+	public String getEmpphone() {
+		return empphone;
+	}
+	public void setEmpphone(String empphone) {
+		this.empphone = empphone;
+	}
+	public integral getIntergralno() {
+		return intergralno;
+	}
+	public void setIntergralno(integral intergralno) {
+		this.intergralno = intergralno;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public integralBiz getIntegralbiz() {
+		return integralbiz;
+	}
+	public void setIntegralbiz(integralBiz integralbiz) {
+		this.integralbiz = integralbiz;
+	}
+	public CommodityBiz getCommoditybiz() {
+		return commoditybiz;
+	}
+	public void setCommoditybiz(CommodityBiz commoditybiz) {
+		this.commoditybiz = commoditybiz;
+	}
+	public String getYzm() {
+		return yzm;
+	}
+	public void setYzm(String yzm) {
+		this.yzm = yzm;
+	}
+	
+}

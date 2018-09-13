@@ -1,0 +1,17 @@
+package com.Integralmall.action;
+
+import com.Integralmall.biz.IntegralTypeBiz;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class IntegralAction extends ActionSupport{
+	private IntegralTypeBiz itgraltypebiz;
+
+	public IntegralTypeBiz getItgraltypebiz() {
+		return itgraltypebiz;
+	}
+
+	public void setItgraltypebiz(IntegralTypeBiz itgraltypebiz) {
+		this.itgraltypebiz = itgraltypebiz;
+	}
+	
+}
